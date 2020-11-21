@@ -3,17 +3,15 @@ conda env create -f environment.yaml
 conda activate e-bert
 ```
 
-Download and prepare necessary resources
+Download and prepare necessary data for the experiments
 ```bash
 bash prepare.sh
 ```
 
-To preserve double blind review, we are unable to include a link to our own Wikipedia2Vec vectors at this stage.
-Therefore, you will have to train your own vectors.
-
-To train Wikipedia2Vec:
+If you want to train your own entity embeddings, run Wikipedia2Vec. This will take a while:
 ```bash
 cd resources/wikipedia2vec
+wget https://dumps.wikimedia.org/enwiki/latest/enwiki-latest-pages-articles.xml.bz2
 
 wikipedia2vec build-dump-db enwiki-latest-pages-articles.xml.bz2 wikipedia2vec.db
 wikipedia2vec build-dictionary --no-lowercase wikipedia2vec.db wikipedia2vec-cased-raw_dic.pkl
@@ -27,19 +25,27 @@ time wikipedia2vec train-embedding --dim-size 768 --mention-db wikipedia2vec-cas
 cd ../..
 ```
 
-Fit the linear mapping
+Or download our pretrained model:
+```bash
+wget $URL
+unzip ebert.zip
+mv ebert/resources/wikipedia2vec/* resources/wikipedia2vec/
+mv ebert/resources/mappers/* mappers
+```
+
+Fit the linear mapping:
 ```bash
 cd code
 python3 run_mapping.py --src wikipedia2vec-base-cased --tgt bert-base-cased --save_out ../mappers/wikipedia2vec-base-cased.bert-base-cased.linear
 ```
 
-Run LAMA experiment
+Run LAMA experiment:
 ```bash
 python3 run_lama.py --wikiname wikipedia2vec-base-cased --modelname bert-base-cased --data_dir ../data/LAMA/data --output_dir ../outputs/LAMA --infer_entity
 python3 score_lama.py --file ../outputs/LAMA/all.bert-base-cased.wikipedia2vec-base-cased_infer.jsonl
 ```
 
-Run LAMA-UHN experiment
+Run LAMA-UHN experiment:
 ```bash
 python3 run_lama.py --wikiname wikipedia2vec-base-cased --modelname bert-base-cased --data_dir ../data/LAMA/data --output_dir ../outputs/LAMA_UHN --infer_entity --uhn
 python3 score_lama.py --file ../outputs/LAMA_UHN/all.bert-base-cased.wikipedia2vec-base-cased_infer.jsonl
