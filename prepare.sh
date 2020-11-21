@@ -1,9 +1,3 @@
-if [[ ! -f resources/wikipedia2vec/enwiki-latest-pages-articles.xml.bz2 ]]; then
-	cd resources/wikipedia2vec
-	wget https://dumps.wikimedia.org/enwiki/latest/enwiki-latest-pages-articles.xml.bz2
-	cd ../..
-fi
-
 if [[ ! -d code/kb ]]; then
 	cd code
 	git clone https://github.com/allenai/kb
