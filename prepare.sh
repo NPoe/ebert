@@ -29,6 +29,10 @@ if [[ ! -d LAMA ]]; then
 	cd ..
 fi
 
+if [[ ! -d data/LAMA ]]; then
+	mkdir data/LAMA
+fi
+
 if [[ ! -d data/LAMA/data ]]; then
 	wget https://dl.fbaipublicfiles.com/LAMA/data.zip -O data/LAMA/data.zip
 	cd data/LAMA
