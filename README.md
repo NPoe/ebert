@@ -8,10 +8,8 @@ Download and prepare necessary resources
 bash prepare.sh
 ```
 
-To preserve double blind review, we are unable to include a link to our own Wikipedia2Vec vectors in this package.
+To preserve double blind review, we are unable to include a link to our own Wikipedia2Vec vectors at this stage.
 Therefore, you will have to train your own vectors.
-Note that this may lead to different experimental results.
-We will publish our own vectors at a later stage.
 
 To train Wikipedia2Vec:
 ```bash
@@ -48,16 +46,16 @@ python3 score_lama.py --file ../outputs/LAMA_UHN/all.bert-base-cased.wikipedia2v
 ```
 
 
-Run Entity Linking (AIDA) experiment
-```bash
-python3 run_aida.py --model_dir ../outputs/AIDA/ebert_mlm
-python3 score_aida.py --gold ../outputs/AIDA/ebert_mlm/aida_test.txt.gold.txt --pred ../outputs/AIDA/ebert_mlm/aida_test.txt.pred_iter3.txt 
-```
-
 Download and unpack RC (FewRel) data from `https://drive.google.com/open?id=1HlWw7Q6-dFSm9jNSCh4VaBf1PlGqt9im` and unpack them in data/fewrel
 
 Run Relation Classification (FewRel) experiment
 ```bash
 python3 run_fewrel.py --data_dir ../data/fewrel --output_dir ../outputs/fewrel/ebert_concat --ent concat --do_train --do_eval --do_test
 python3 score_fewrel.py ../outputs/fewrel/ebert_concat/test_gold.txt ../outputs/fewrel/ebert_concat/test_pred.txt
+```
+
+Run Entity Linking (AIDA) experiment
+```bash
+python3 run_aida.py --model_dir ../outputs/AIDA/ebert_mlm
+python3 score_aida.py --gold ../outputs/AIDA/ebert_mlm/aida_test.txt.gold.txt --pred ../outputs/AIDA/ebert_mlm/aida_test.txt.pred_iter3.txt 
 ```
