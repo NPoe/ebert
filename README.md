@@ -53,9 +53,3 @@ Run Relation Classification (FewRel) experiment
 python3 run_fewrel.py --data_dir ../data/fewrel --output_dir ../outputs/fewrel/ebert_concat --ent concat --do_train --do_eval --do_test
 python3 score_fewrel.py ../outputs/fewrel/ebert_concat/test_gold.txt ../outputs/fewrel/ebert_concat/test_pred.txt
 ```
-
-Run Entity Linking (AIDA) experiment
-```bash
-python3 run_aida.py --model_dir ../outputs/AIDA/ebert_mlm
-python3 score_aida.py --gold ../outputs/AIDA/ebert_mlm/aida_test.txt.gold.txt --pred ../outputs/AIDA/ebert_mlm/aida_test.txt.pred_iter3.txt 
-```
