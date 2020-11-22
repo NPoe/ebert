@@ -27,7 +27,7 @@ cd ../..
 
 Or download our pretrained model:
 ```bash
-wget $URL
+wget https://www.cis.uni-muenchen.de/~poerner/blobs/e-bert/ebert.zip
 unzip ebert.zip
 mv ebert/resources/wikipedia2vec/* resources/wikipedia2vec/
 mv ebert/resources/mappers/* mappers
