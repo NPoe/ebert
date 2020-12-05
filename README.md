@@ -27,10 +27,10 @@ cd ../..
 
 Or download our pretrained model:
 ```bash
-wget https://www.cis.uni-muenchen.de/~poerner/blobs/e-bert/ebert.zip
-unzip ebert.zip
-mv ebert/resources/wikipedia2vec/* resources/wikipedia2vec/
-mv ebert/resources/mappers/* mappers
+wget https://www.cis.uni-muenchen.de/~poerner/blobs/e-bert/wikipedia2vec-base-cased
+wget https://www.cis.uni-muenchen.de/~poerner/blobs/e-bert/wikipedia2vec-base-cased.bert-base-cased.linear.npy
+mv wikipedia2vec-base-cased resources/wikipedia2vec
+mv wikipedia2vec-base-cased.bert-base-cased.linear.npy mappers
 ```
 
 Fit the linear mapping:
