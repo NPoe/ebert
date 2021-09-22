@@ -30,7 +30,7 @@ Or download our pretrained model:
 wget https://www.cis.uni-muenchen.de/~poerner/blobs/e-bert/wikipedia2vec-base-cased
 wget https://www.cis.uni-muenchen.de/~poerner/blobs/e-bert/wikipedia2vec-base-cased.bert-base-cased.linear.npy
 mv wikipedia2vec-base-cased resources/wikipedia2vec
-mv wikipedia2vec-base-cased.bert-base-cased.linear.npy mappers
+mkdir -p mappers && mv wikipedia2vec-base-cased.bert-base-cased.linear.npy mappers
 ```
 
 Fit the linear mapping:
@@ -41,12 +41,14 @@ python3 run_mapping.py --src wikipedia2vec-base-cased --tgt bert-base-cased --sa
 
 Run LAMA experiment:
 ```bash
+mkdir -p ../outputs/LAMA
 python3 run_lama.py --wikiname wikipedia2vec-base-cased --modelname bert-base-cased --data_dir ../data/LAMA/data --output_dir ../outputs/LAMA --infer_entity
 python3 score_lama.py --file ../outputs/LAMA/all.bert-base-cased.wikipedia2vec-base-cased_infer.jsonl
 ```
 
 Run LAMA-UHN experiment:
 ```bash
+mkdir -p ../outputs/LAMA_UHN
 python3 run_lama.py --wikiname wikipedia2vec-base-cased --modelname bert-base-cased --data_dir ../data/LAMA/data --output_dir ../outputs/LAMA_UHN --infer_entity --uhn
 python3 score_lama.py --file ../outputs/LAMA_UHN/all.bert-base-cased.wikipedia2vec-base-cased_infer.jsonl
 ```
